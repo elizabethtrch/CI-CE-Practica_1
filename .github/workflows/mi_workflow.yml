@@ -1,0 +1,38 @@
+name: mi_workflow  # 1. Dale un nombre descriptivo a tu workflow
+
+on:
+  push: # 2. ¿Qué evento(s) quieres usar para disparar este workflow? (añade mínimo 2)
+        #   2.1. el workflow se ejecutara cada vez que se realice push a la rama main.
+  - main
+  workflow_dispatch: # 2.2. el workflow se puede ejecutar manualmente desde la interfaz de GitHub.
+    inputs:
+          nameenv:
+            type: choice
+            description: Application Environment
+            options:
+              - "Elizabeth Toro Chalarca"
+              - "Edward Alejandro Rayo Cortes"
+            default: "Elizabeth Toro Chalarca"     
+
+jobs:
+  imprimir_info:  # No cambies este nombre, lo usaremos para evaluar
+    runs-on: ubuntu-latest  # 3. ¿En qué sistema operativo quieres que se ejecute este job? (ubuntu-latest, windows-latest, macos-latest)
+                             # Eligimos ubuntu-latest pensando que es el mas comun 
+
+    steps:
+      - uses: actions/checkout@v3  # Este paso clona tu repositorio. No lo modifiques.
+
+      - name: Imprimir Mensaje Personalizado
+        # 4. Reemplaza [TU NOMBRE COMPLETO] con tu nombre.
+        # 5. ¿Qué comando de shell usarías para obtener la fecha y hora?
+        run: |
+          echo "Hola, soy ${{github.event.inputs.nameenv}} y este es mi primer workflow!"  
+          echo "La fecha y hora actual es: $(date)"  
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.12 # 6. Elige una versión de Python (ej: '3.8', '3.9', '3.10', '3.11', '3.12').
+
+      # - name: Ejecutar script Python
+      #   run: ??? #7. Completa para ejecutar el script de python. Pista: python <nombre_archivo>
