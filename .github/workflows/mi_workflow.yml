@@ -8,7 +8,8 @@ on:
     inputs:
           nameenv:
             type: choice
-            description: Application Environment
+            description: Elige tu nombre completo
+            required: true
             options:
               - "Elizabeth Toro Chalarca"
               - "Edward Alejandro Rayo Cortes"
@@ -26,7 +27,7 @@ jobs:
         # 4. Reemplaza [TU NOMBRE COMPLETO] con tu nombre.
         # 5. ¿Qué comando de shell usarías para obtener la fecha y hora?
         run: |
-          echo "Hola, soy ${{github.event.inputs.nameenv}} y este es mi primer workflow!"  
+          echo "Hola, soy ${{github.event.inputs.nameenv || 'Elizabeth' }} y este es mi primer workflow!"  
           echo "La fecha y hora actual es: $(date)"  
 
       - name: Configurar Python
