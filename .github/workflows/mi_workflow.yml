@@ -3,7 +3,7 @@ name: mi_workflow  # 1. Dale un nombre descriptivo a tu workflow
 on:
   push: # 2. ¿Qué evento(s) quieres usar para disparar este workflow? (añade mínimo 2)
         #   2.1. el workflow se ejecutara cada vez que se realice push a la rama main.
-  - main
+    - main
   workflow_dispatch: # 2.2. el workflow se puede ejecutar manualmente desde la interfaz de GitHub.
     inputs:
           nameenv:
